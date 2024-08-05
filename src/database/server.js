@@ -44,25 +44,26 @@ app.get('/products', async function (request, response) {
 
 
 const UserModel = require('../models/UserModel.js');
+const UserController = require('../controllers/UserController.js');
+const ProductController = require('../controllers/ProductController.js');
 
 app.get('/users/', async function (request, response) {
     const users = await UserModel.findAll();
     response.json(users);
 });
 
-app.post('/users',  function (request, response) {
-    UserModel.create(request.body);
-    return response.json({
-        message:"Usuario criado com sucesso!" });
-    });
+app.post('/users', UserController.create);
 
-app.post ('/products', function (request,response)  {
-    ProductModel.create(request.body);
-   return response.json({
-    message:"Produto disponivel"
-   });
+app.put('/users/:id', UserController.update );
+  
+app.delete('/users/:id', UserController.delete);
 
-});
+
+app.post ('/products', ProductController.create);
+
+app.put('/products/:id', ProductController.update );
+
+app.delete('/products/:id', ProductController.delete);
 
 
 app.listen(3000);
