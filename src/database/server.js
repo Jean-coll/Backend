@@ -46,6 +46,7 @@ app.get('/products', async function (request, response) {
 const UserModel = require('../models/UserModel.js');
 const UserController = require('../controllers/UserController.js');
 const ProductController = require('../controllers/ProductController.js');
+const UserCreateValidation=require("../middleware/UserCreateValidation");
 
 app.get('/users/', async function (request, response) {
     const users = await UserModel.findAll();
@@ -58,6 +59,7 @@ app.put('/users/:id', UserController.update );
   
 app.delete('/users/:id', UserController.delete);
 
+app.post('users',UserCreateValidation,UserController.create);
 
 app.post ('/products', ProductController.create);
 

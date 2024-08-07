@@ -4,13 +4,17 @@ const ProductController = {
 
     create(request) {
         ProductModel.create(request.body);
-     return response.json({
+      response.json({
         message:"Produto disponivel"
        });
     },
     async list(request,response) {
-        let products = await ProductModel.findAll();
-        console.log(products[0].dataValues);
+        const products = await ProductModel.findAll();
+       response.json({
+        message:"Produto criado"
+       })
+
+       
     },
     async update(request, response) {
         let id = request.params.id;
